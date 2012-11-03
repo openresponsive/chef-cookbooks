@@ -1,0 +1,6 @@
+RAILS_ENV=<%= @rails_env %>
+RAILS_ROOT=<%= @rails_root %>
+PID=$RAILS_ROOT/tmp/pids/unicorn.pid
+START_CMD="bundle exec unicorn_rails"
+USER=<%= @user %>
+RESTART_SLEEP=0
