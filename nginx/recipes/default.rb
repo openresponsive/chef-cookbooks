@@ -11,7 +11,7 @@ end
 %w{ /usr/local/nginx/sites-available /usr/local/nginx/sites-enabled }.each do |dirname|
   directory dirname do
     owner "www-data"
-    group "vagrant"
+    group node[:system_user]
     mode "0644"
     recursive true
     action :create
@@ -22,7 +22,7 @@ nginx_source_path = "/u/sources/nginx-#{node[:nginx][:version]}.tar.gz"
 
 remote_file(nginx_source_path) do
   source "http://nginx.org/download/nginx-#{node[:nginx][:version]}.tar.gz"
-  owner "vagrant"
+  owner node[:system_user]
   not_if do
     File.exists?(nginx_source_path)
   end

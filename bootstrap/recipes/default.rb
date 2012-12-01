@@ -14,11 +14,15 @@ if node[:system_user] != 'vagrant'
     password "$1$0lpZCZ7q$Ogd3QcaqDj2k3g4Kh3zuO1" # testpass
     supports manage_home: true
   end
+
+  group node[:system_user] do
+    members [node[:system_user]]
+  end
 end
 
 %w(/u/sources /u/apps).each do |dirname|
   directory dirname do
-    owner "vagrant"
+    owner node[:system_user]
     group "www-data"
     mode "0774"
     recursive true
